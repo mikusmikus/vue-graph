@@ -59,3 +59,38 @@ export const createChartOptions = (): ChartOptions<'line'> => ({
     mode: 'index',
   },
 })
+
+export const createDetailedChartOptions = (): ChartOptions<'line'> => ({
+  ...createChartOptions(),
+  plugins: {
+    ...createChartOptions().plugins,
+    tooltip: {
+      mode: 'index',
+      intersect: false,
+      callbacks: {
+        label: (context) => {
+          const value = context.parsed.y
+          return `Vērtība: ${value.toFixed(1)}%`
+        },
+        title: (tooltipItems) => {
+          const date = new Date(tooltipItems[0].label)
+          return date.toLocaleTimeString('lv-LV', {
+            hour: '2-digit',
+            minute: '2-digit',
+            second: '2-digit',
+          })
+        },
+      },
+    },
+  },
+  scales: {
+    ...createChartOptions().scales,
+    y: {
+      ...createChartOptions().scales.y,
+      ticks: {
+        stepSize: 10,
+        callback: (value) => `${value}%`,
+      },
+    },
+  },
+})
