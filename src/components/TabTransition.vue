@@ -1,16 +1,18 @@
 <template>
-  <div class="relative min-h-[400px]">
-    <TransitionGroup
-      tag="div"
-      :enter-active-class="'transition-all duration-300 ease-out'"
-      :enter-from-class="'opacity-0 translate-y-4'"
-      :enter-to-class="'opacity-100 translate-y-0'"
-      :leave-active-class="'transition-all duration-200 ease-in'"
-      :leave-from-class="'opacity-100 translate-y-0'"
-      :leave-to-class="'opacity-0 -translate-y-4'"
+  <div class="relative">
+    <Transition
+      mode="out-in"
+      enter-active-class="transition-all duration-300 ease-out"
+      enter-from-class="opacity-0 translate-y-2"
+      enter-to-class="opacity-100 translate-y-0"
+      leave-active-class="transition-all duration-200 ease-in"
+      leave-from-class="opacity-100 translate-y-0"
+      leave-to-class="opacity-0 translate-y-2"
     >
-      <slot></slot>
-    </TransitionGroup>
+      <div class="w-full">
+        <slot></slot>
+      </div>
+    </Transition>
   </div>
 </template>
 
@@ -25,6 +27,16 @@ export default defineComponent({
 <style scoped>
 .relative {
   position: relative;
-  min-height: 400px;
+}
+
+.transition-all {
+  transition-property: all;
+  will-change: transform, opacity;
+}
+
+/* Prevent content jumping */
+.w-full {
+  transform-origin: top;
+  backface-visibility: hidden;
 }
 </style>

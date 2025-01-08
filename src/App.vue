@@ -22,7 +22,7 @@
 
       <!-- Overview Tab -->
       <TabTransition>
-        <div v-show="activeTab === 'overview'" key="overview" class="tab-content">
+        <div v-if="activeTab === 'overview'" key="overview" class="space-y-6">
           <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 mb-6">
             <ChartCard
               title="CPU Noslodze"
@@ -61,7 +61,7 @@
 
       <!-- CPU Tab -->
       <TabTransition>
-        <div v-show="activeTab === 'cpu'" key="cpu" class="tab-content">
+        <div v-if="activeTab === 'cpu'" key="cpu" class="space-y-6">
           <div class="grid grid-cols-1 lg:grid-cols-2 gap-6">
             <ChartCard
               title="CPU Noslodze (Reālā laikā)"
@@ -90,7 +90,7 @@
 
       <!-- Memory Tab -->
       <TabTransition>
-        <div v-show="activeTab === 'memory'" key="memory" class="tab-content">
+        <div v-if="activeTab === 'memory'" key="memory" class="space-y-6">
           <div class="grid grid-cols-1 lg:grid-cols-2 gap-6">
             <ChartCard
               title="RAM Izmantošana (Reālā laikā)"
@@ -119,7 +119,7 @@
 
       <!-- Network Tab -->
       <TabTransition>
-        <div v-show="activeTab === 'network'" key="network" class="tab-content">
+        <div v-if="activeTab === 'network'" key="network" class="space-y-6">
           <div class="grid grid-cols-1 lg:grid-cols-2 gap-6">
             <ChartCard
               title="Tīkla Aktivitāte (Reālā laikā)"
