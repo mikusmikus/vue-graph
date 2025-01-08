@@ -25,32 +25,50 @@ export const createChartOptions = (): ChartOptions<'line'> => ({
     easing: 'easeInOutQuart',
   },
   scales: {
-    y: {
-      beginAtZero: true,
-      max: 100,
-      grid: {
-        color: 'rgba(0, 0, 0, 0.1)',
-      },
-      ticks: {
-        stepSize: 20,
-      },
-    },
     x: {
       grid: {
         display: false,
+      },
+      ticks: {
+        maxRotation: 0,
+        autoSkip: true,
+        maxTicksLimit: 6,
+      },
+    },
+    y: {
+      beginAtZero: true,
+      grid: {
+        color: 'rgba(0, 0, 0, 0.1)',
+      },
+      border: {
+        display: false,
+      },
+      ticks: {
+        callback: (value) => `${value}%`,
+        maxTicksLimit: 6,
       },
     },
   },
   plugins: {
     legend: {
-      display: true,
-      position: 'top',
+      display: false,
     },
     tooltip: {
       mode: 'index',
       intersect: false,
-      animation: {
-        duration: 200,
+      callbacks: {
+        label: (context) => {
+          const value = context.parsed.y
+          return `Vērtība: ${value.toFixed(1)}%`
+        },
+        title: (tooltipItems) => {
+          const date = new Date(tooltipItems[0].label)
+          return date.toLocaleTimeString('lv-LV', {
+            hour: '2-digit',
+            minute: '2-digit',
+            second: '2-digit',
+          })
+        },
       },
     },
   },
@@ -88,7 +106,6 @@ export const createDetailedChartOptions = (): ChartOptions<'line'> => ({
     y: {
       ...createChartOptions().scales.y,
       ticks: {
-        stepSize: 10,
         callback: (value) => `${value}%`,
       },
     },

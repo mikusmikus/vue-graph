@@ -104,7 +104,7 @@ export default defineComponent({
       const last = data[data.length - 1]
       const prev = data[data.length - 2]
       const diff = (((last - prev) / prev) * 100).toFixed(1)
-      return diff > 0 ? `+${diff}%` : `${diff}%`
+      return parseFloat(diff) > 0 ? `+${diff}%` : `${diff}%`
     })
 
     const trendClass = computed(() => {

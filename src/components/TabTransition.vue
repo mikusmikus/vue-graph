@@ -1,28 +1,24 @@
 <template>
   <div class="relative min-h-[400px]">
-    <Motion
-      :initial="{ opacity: 0, y: 20 }"
-      :animate="{ opacity: 1, y: 0 }"
-      :exit="{ opacity: 0, y: -20 }"
-      :transition="{
-        duration: 0.3,
-        ease: [0.4, 0, 0.2, 1],
-      }"
+    <TransitionGroup
+      tag="div"
+      :enter-active-class="'transition-all duration-300 ease-out'"
+      :enter-from-class="'opacity-0 translate-y-4'"
+      :enter-to-class="'opacity-100 translate-y-0'"
+      :leave-active-class="'transition-all duration-200 ease-in'"
+      :leave-from-class="'opacity-100 translate-y-0'"
+      :leave-to-class="'opacity-0 -translate-y-4'"
     >
       <slot></slot>
-    </Motion>
+    </TransitionGroup>
   </div>
 </template>
 
 <script lang="ts">
 import { defineComponent } from 'vue'
-import { Motion } from '@oku-ui/motion'
 
 export default defineComponent({
   name: 'TabTransition',
-  components: {
-    Motion,
-  },
 })
 </script>
 
